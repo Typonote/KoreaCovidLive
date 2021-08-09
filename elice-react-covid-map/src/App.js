@@ -1,10 +1,11 @@
+import logo from './logo.svg';
 import './App.css';
-import Select from './CovidMap';
 
+import CovidMap from './CovidMap';
 function App() {
   return (
     <div className="App">
-        <Select />
+        <CovidMap />
     </div>
   );
 }
