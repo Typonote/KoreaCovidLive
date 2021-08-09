@@ -19,6 +19,8 @@ import {
   Jeju,
 } from "./area/all_area";
 
+import { BrowserRouter as Router, Switch,Route,Link } from "react-router-dom";
+
 import axios from "axios";
 
 const fillColor = ["#4088da", "#ffb911", "#fc7001", "#e60000"];
@@ -158,4 +160,39 @@ function CovidMap() {
     </div>
   );
 }
-export default CovidMap;
+
+function Test() {
+  return (
+    <div>
+      Hello React
+    </div>
+  )
+}
+
+function Select() {
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">CovidMap</Link>
+          </li>
+          <li>
+            <Link to="/test">Test</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Switch>
+        <Route exact path="/">
+            <CovidMap />
+        </Route>
+        <Route path="/test">
+            <Test />
+        </Route>
+      </Switch>
+    </Router>
+  )
+}
+
+export default Select;
