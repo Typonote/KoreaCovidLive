@@ -26,7 +26,8 @@ const fillColor = ["#4088da", "#ffb911", "#fc7001", "#e60000"];
 function CovidInfo({area,num,level,updated_data}) {
   return (
     <div>
-      <h1>{area}</h1>
+      <h1>대한민국 코로나 현황</h1>
+      <h2>{area}</h2>
       <p>확진자 수 : {num}</p>
       <p>거리두기 단계 : {level}</p>
       <p>{updated_data} (기준)</p>
@@ -118,11 +119,25 @@ function CovidMap() {
     console.log("업데이트 된 항목", covidData);
   }, [covidData]);
 
-  useEffect(() => {
+  function fetch() {
     axios.post("http://localhost:5000/covidData").then((response) => {
       // 요청 성공 시 실행되는 코드
       setCovidData(response.data);
     });
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      fetch();
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetch();
   }, []);
 
   function handleClick(e) {
